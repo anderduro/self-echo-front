@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de CV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .chat-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            padding: 30px;
+        }
+
+        .message-container {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .response {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+            align-self: flex-end;
+        }
+
+        .profile-pic {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 5px;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 3px;
+        }
+
+        .message-text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+        .input-container input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="text-align: center;">Ander Duro SelfEcho AI</h1>
+    <div class="chat-container" id="chat-container"></div>
+    <div class="input-container">
+        <input type="text" id="consulta" name="consulta" placeholder="Escribe tu consulta...">
+        <button onclick="consultar()">Enviar</button>
+    </div>
+</div>
+
+<script>
+    function addMessage(message, isResponse) {
+        var chatContainer = document.getElementById('chat-container');
+        var div = document.createElement('div');
+        div.className = 'message-container';
+
+        var profileDiv = document.createElement('div');
+        profileDiv.className = 'profile-info';
+
+        var profilePic = document.createElement('img');
+        profilePic.src = isResponse ? 'bot.png' : 'user.png';
+        profilePic.className = 'profile-pic';
+        profileDiv.appendChild(profilePic);
+
+        var profileName = document.createElement('div');
+        profileName.className = 'profile-name';
+        profileName.innerText = isResponse ? 'SelfEcho' : 'User';
+        profileDiv.appendChild(profileName);
+
+        var messageDiv = document.createElement('div');
+        messageDiv.className = isResponse ? 'response' : 'message';
+
+        var messageText = document.createElement('div');
+        messageText.className = 'message-text';
+        messageText.innerText = message;
+
+        messageDiv.appendChild(profileDiv.cloneNode(true)); // Clonar el perfil para mantenerlo en una línea separada
+        messageDiv.appendChild(messageText);
+
+        div.appendChild(messageDiv);
+
+        chatContainer.appendChild(div);
+    }
+
+    function consultar() {
+        var consulta = document.getElementById('consulta').value;
+        addMessage(consulta, false);
+
+        fetch('http://127.0.0.1:5000/consultar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ query: consulta })
+        })
+        .then(response => response.json())
+        .then(data => {
+            addMessage(data.respuesta, true);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        document.getElementById('consulta').value = '';
+    }
+</script>
+
+</body>
+</html>
