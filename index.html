@@ -41,12 +41,12 @@
          </div>
          <div id="arrow" class="arrow">
             <section id="section05" class="demo">
-                <a href="#ir3a"><span></span>Chatea conmigo</a>
+                <a href="#selfecho-chat-container"><span></span>Chatea conmigo</a>
               </section>
          </div>
       </div>
       <div id="selfecho-chat-container" class="selfecho-chat-container">
-                <div id="ir3a" class="container">
+                <div id="container" class="container">
                     <div class="chat-container fade-in" id="chat-container"></div>
                     <div class="input-container">
                        <input type="text" id="consulta" name="consulta" placeholder="Escribe tu consulta...">
@@ -137,37 +137,40 @@
          var sessionId = allCookies.split('; ').find(row => row.startsWith('session_id')).split('=')[1];
          
          function addMessage(message, isResponse) {
-             var chatContainer = document.getElementById('chat-container');
-             var div = document.createElement('div');
-             div.className = 'message-container fade-in-left';
-         
-             var profileDiv = document.createElement('div');
-             profileDiv.className = 'profile-info';
-         
-             var profilePic = document.createElement('img');
-             profilePic.src = isResponse ? 'bot.png' : 'user.png';
-             profilePic.className = 'profile-pic';
-             profileDiv.appendChild(profilePic);
-         
-             var profileName = document.createElement('div');
-             profileName.className = 'profile-name';
-             profileName.innerText = isResponse ? 'SelfEcho' : 'User';
-             profileDiv.appendChild(profileName);
-         
-             var messageDiv = document.createElement('div');
-             messageDiv.className = isResponse ? 'response' : 'message';
-         
-             var messageText = document.createElement('div');
-             messageText.className = 'message-text';
-             messageText.innerText = message;
-         
-             messageDiv.appendChild(profileDiv.cloneNode(true)); 
-             messageDiv.appendChild(messageText);
-         
-             div.appendChild(messageDiv);
-         
-             chatContainer.appendChild(div);
-         }
+            var chatContainer = document.getElementById('chat-container');
+            var div = document.createElement('div');
+            div.className = 'message-container fade-in-left';
+
+            var profileDiv = document.createElement('div');
+            profileDiv.className = 'profile-info';
+
+            var profilePic = document.createElement('img');
+            profilePic.src = isResponse ? 'bot.png' : 'user.png';
+            profilePic.className = 'profile-pic';
+            profileDiv.appendChild(profilePic);
+
+            var profileName = document.createElement('div');
+            profileName.className = 'profile-name';
+            profileName.innerText = isResponse ? 'SelfEcho' : 'User';
+            profileDiv.appendChild(profileName);
+
+            var messageDiv = document.createElement('div');
+            messageDiv.className = isResponse ? 'response' : 'message';
+
+            var messageText = document.createElement('div');
+            messageText.className = 'message-text';
+            messageText.innerText = message;
+
+            messageDiv.appendChild(profileDiv.cloneNode(true)); 
+            messageDiv.appendChild(messageText);
+
+            div.appendChild(messageDiv);
+
+            chatContainer.appendChild(div);
+
+            // Desplazar hacia abajo para mostrar el nuevo mensaje
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
          
          function consultar() {
              var consulta = document.getElementById('consulta').value;
