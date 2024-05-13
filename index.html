@@ -3,6 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <link rel="stylesheet" href="style.css">
       <title>Consulta de CV</title>
    </head>
@@ -38,8 +39,20 @@
          </div>
          <div id="welcome-presentation" class="gjs-grid-row">
          </div>
-         <div id="arrow" class="gjs-grid-row">
+         <div id="arrow" class="arrow">
+            <section id="section05" class="demo">
+                <a href="#ir3a"><span></span>Chatea conmigo</a>
+              </section>
          </div>
+      </div>
+      <div id="selfecho-chat-container" class="selfecho-chat-container">
+                <div id="ir3a" class="container">
+                    <div class="chat-container fade-in" id="chat-container"></div>
+                    <div class="input-container">
+                       <input type="text" id="consulta" name="consulta" placeholder="Escribe tu consulta...">
+                       <button onclick="consultar()">Enviar</button>
+                    </div>
+                 </div>
       </div>
       <div id="iy5ml" class="gjs-grid-row">
       <div id="iohrq" class="gjs-grid-column">
@@ -55,13 +68,7 @@
          </div>
       </div>
       <div id="inqtf" class="gjs-grid-column">
-         <div id="ir3a" class="container">
-            <div class="chat-container fade-in" id="chat-container"></div>
-            <div class="input-container">
-               <input type="text" id="consulta" name="consulta" placeholder="Escribe tu consulta...">
-               <button onclick="consultar()">Enviar</button>
-            </div>
-         </div>
+ 
       </div>
       <script>
          document.addEventListener("DOMContentLoaded", function() {
@@ -117,7 +124,14 @@
          
              sendWelcomeMessage('#chat-container');
          });
-         
+
+         $(function() {
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+            });
+        });
+                    
          document.cookie = "session_id=" + generateSessionId();
          var allCookies = document.cookie;
          var sessionId = allCookies.split('; ').find(row => row.startsWith('session_id')).split('=')[1];

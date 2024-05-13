@@ -12,12 +12,22 @@
     place-items: center; 
     width: 100%;
     position: absolute;
-    margin-bottom: 0px;
+    margin-top: 0px;
     padding: 10px;
 }
 
 .selfecho-container{
     height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(180deg, #3F4E4F 0%, rgba(17, 17, 17, 1) 0%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.selfecho-chat-container{
+    height: 150vh;
+    display: grid;
     place-items: center; 
     width: 100%;
     position: static;
@@ -29,7 +39,7 @@
     place-items: center; 
     width: 100%;
     position: absolute;
-    margin-top: 60vh;
+    margin-top: 55vh;
     text-align: center;
 }
 
@@ -181,13 +191,127 @@ body {
     color: #f4f4f4;
 }
 
+.arrow{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    align-items: flex-end;
+    display: flex;
+    justify-content: center;
+    bottom: 8px;
+
+}
+
+section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    align-items: center;
+    justify-content: center;
+    
+    
+  }
+  section::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 80%;
+    background: -webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 100%);
+    background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 100%);
+  }
+  section h1 {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .demo a {
+    position: absolute;
+    bottom: 20px;
+    z-index: 2;
+    display: inline-block;
+    color: #fff;
+    letter-spacing: .1em;
+    text-decoration: none;
+    transition: opacity .3s;
+    width: 100%;
+    text-align: center;
+  }
+  .demo a:hover {
+    opacity: .5;
+  }
+
+  #section05 { background: url(https://www.nxworld.net/example/css-scroll-down-button/bg05.jpg) center center / cover no-repeat;}
+
+ #section05 a {
+    padding-top: 70px;
+  }
+  #section05 a span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-animation: sdb05 1.5s infinite;
+    animation: sdb05 1.5s infinite;
+    box-sizing: border-box;
+  }
+  @-webkit-keyframes sdb05 {
+    0% {
+      -webkit-transform: rotate(-45deg) translate(0, 0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+      opacity: 0;
+    }
+  }
+  @keyframes sdb05 {
+    0% {
+      transform: rotate(-45deg) translate(0, 0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(-45deg) translate(-20px, 20px);
+      opacity: 0;
+    }
+  }
+  
+  
+
 .container {
-    max-width: 800px;
-    margin: 20px auto;
+    width: 100%;
+    max-width: 60%;
+    margin: 50%;
     padding: 20px;
     background-color: #2C3639;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 -1vmin 2vmin LightPink inset, 0 1vmin 2vmin MediumPurple inset,
+    0 -1vmin 3vmin purple inset;
+    content: "";
+    filter: drop-shadow(0 0 1vmin Thistle) drop-shadow(0 2vmin 2vmin Orchid)
+        drop-shadow(1vmin -1vmin 3vmin MediumSlateBlue)
+        drop-shadow(0 0 3vmin MediumOrchid);
 }
 
 .chat-container {
@@ -200,6 +324,7 @@ body {
 
 .input-container {
     display: flex;
+
 }
 
 .input-container input[type="text"] {
@@ -213,7 +338,7 @@ body {
 
 .input-container button {
     padding: 10px 20px;
-    background-color: #A2785C;
+    background-color: #b35cb3;
     color: #fff;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -221,7 +346,7 @@ body {
 }
 
 .input-container button:hover {
-    background-color: #7c5c47;
+    background-color: #8d488d;
 }
 
 .gjs-heading {
@@ -245,7 +370,6 @@ body {
 #chat-container {
     margin-top: 0px;
     margin-right: 0px;
-    margin-bottom: 706px;
     margin-left: 0px;
 }
 
@@ -465,7 +589,8 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 650px;
+    max-height: 55%;
     margin: 20px auto;
     padding: 20px;
     background-color: #2C3639;
@@ -496,7 +621,7 @@ body {
 }
 
 .response {
-    background-color: #A2785C;
+    background-color: #2b2b2b;
     color: #f2f2f2;
     padding: 10px;
     border-radius: 10px;
@@ -531,31 +656,7 @@ body {
     line-height: 1.4;
 }
 
-.input-container {
-    display: flex;
-}
 
-.input-container input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #3F4E4F;
-    border-radius: 5px 0 0 5px;
-    background-color: #3F4E4F;
-    color: #f4f4f4;
-}
-
-.input-container button {
-    padding: 10px 20px;
-    background-color: #A2785C;
-    color: #fff;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
-.input-container button:hover {
-    background-color: #7c5c47;
-}
 /* Definimos la animación de desvanecimiento */
 @keyframes fadeInLeft {
     from {
